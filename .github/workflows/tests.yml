@@ -1,0 +1,27 @@
+
+name: Tests Python
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Recuperer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Verifier la syntaxe Python
+        run: python -m py_compile exercices/bonjour.py
+
+      - name: Executer le programme
+        run: python exercices/bonjour.py
